@@ -2,11 +2,32 @@ const express = require('express')
 const app = express()
 const fileupload = require("express-fileupload")
 const port = 7000
+const cloudinary=require("cloudinary").v2
 
+require("./db/connect")
+cloudinary.config({ 
+    cloud_name: 'dromvfu7p', 
+    api_key: '765263738728749', 
+    api_secret: '2tcepo7Lqtj09JVhe51pMMm2DGo',
+
+  });
 
 const rout =require("./router/home")
+app.use(fileupload({
+      useTempFiles: true,
+    })
+  );
+
+
+
+
+
+
+
+  
 
 //file upload to current directory
+
 
 // app.use(fileupload())
 // app.use(express.json())
@@ -23,9 +44,12 @@ const rout =require("./router/home")
 //         })
 //     })
 // })
+
+
+
+
+
+
+
 app.use("/api/",rout)
-
-
-
-
 app.listen(port, () => console.log(`Example app listening on port ${port}!`))
